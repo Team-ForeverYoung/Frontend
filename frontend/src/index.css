@@ -1,0 +1,23 @@
+/* Tailwind에서 기본 제공하는 스타일을 사용하면서 HTML, BODY에 초기화 추가 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
