@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { oliveMemberRegister } from '../../service/test/oliveservice';
+import { oliveMemberRegister } from '../../service/test/registerservice';
 import { OliveUserRegisterRequestDto } from '../../service/dto/OliveUserRequestDto';
 
 const OliveUserRegisterPage = () => {
