@@ -10,7 +10,7 @@ RUN npm rebuild esbuild
 
 COPY . .
 
-RUN npm run build
+RUN npm run build:3tier
 
 FROM nginx:latest
 
