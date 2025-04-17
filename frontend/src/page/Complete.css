@@ -1,0 +1,114 @@
+.complete-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+  }
+  
+  .complete-left {
+    width: 58%;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    /*가운데 정렬을 위한 추가 스타일 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    height: 100%; /* 필요한 경우 높이 고정도 고려 가능 */
+  }
+  
+  
+  .complete-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .complete-message {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .complete-button {
+    padding: 12px 24px;
+    background-color: #ff4d68;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .complete-button:hover {
+    background-color: #e8455e;
+  }
+  
+  /* 오른쪽 결제 요약 박스 재사용 스타일 */
+  .cart-right {
+    width: 38%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .step {
+    padding: 15px 30px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #888;
+  }
+  
+  .step.active {
+    background-color: #111;
+    color: white;
+  }
+  
+  .cart-section-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .cart-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .cart-price-box .price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 8px 0;
+  }
+  
+  .discount {
+    color: red;
+  }
+  
+  .total-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  .divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+  }
+  
