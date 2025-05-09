@@ -1,7 +1,8 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Router와 Routes, Route import
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import App from './App.jsx';
 import TestUserRegisterPage from './page/test/TestUserRegisterPage.jsx';
 import TestUserInfoPage from './page/test/TestUserInfoPage.jsx';
@@ -10,8 +11,13 @@ import UserloginPage from './page/test/UserloginPage.jsx'
 
 
 const root = createRoot(document.getElementById('root'));
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
   <StrictMode>
     <Router>
       <Routes>
