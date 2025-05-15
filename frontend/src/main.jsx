@@ -17,8 +17,8 @@ root.render(
       <Routes>
         <Route path="/test/register" element={<TestUserRegisterPage/>}/>
         <Route path="/test/info" element={<TestUserInfoPage/>}/>
-        <Route path="/test/join" element={<OliveUserRegisterPage/>}/>
-        <Route path="/test/login" element={<UserloginPage/>}/>
+        <Route path="/join" element={<OliveUserRegisterPage/>}/>
+        <Route path="/login" element={<UserloginPage/>}/>
       </Routes>
     </Router>
   </StrictMode>
