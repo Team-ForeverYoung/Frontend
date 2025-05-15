@@ -8,19 +8,24 @@ import React, { StrictMode } from 'react';
 import TestUserRegisterPage from './page/test/TestUserRegisterPage.jsx';
 import TestUserInfoPage from './page/test/TestUserInfoPage.jsx';
 import UserloginPage from './page/test/UserloginPage.jsx'
+import { initBaseInstance } from './service/config.js'; // 또는 정확한 경로
 
 
-// const root = createRoot(document.getElementById('root'));
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/test/register" element={<TestUserRegisterPage/>}/>
-        <Route path="/test/info" element={<TestUserInfoPage/>}/>
-        {/* <Route path="/test/join" element={<OliveUserRegisterPage/>}/> */}
-        <Route path="/test/login" element={<UserloginPage/>}/>
-      </Routes>
-    </Router>
-  </StrictMode>
-);
+async function main() {
+  await initBaseInstance();
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <StrictMode>
+      <Router>
+        <Routes>
+          <Route path="/test/register" element={<TestUserRegisterPage/>}/>
+          <Route path="/test/info" element={<TestUserInfoPage/>}/>
+          <Route path="/test/login" element={<UserloginPage/>}/>
+        </Routes>
+      </Router>
+    </StrictMode>
+  );
+}
+
+main();
