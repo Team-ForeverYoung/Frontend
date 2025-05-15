@@ -39,6 +39,7 @@ spec:
             steps {
                 sh '''
                     apk update
+                    apk add --no-cache curl
                     apk add --no-cache \
                         python3 py3-pip make cmake gcc g++ libc-dev libffi-dev openssl-dev \
                         aws-cli
