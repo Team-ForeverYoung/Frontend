@@ -8,7 +8,7 @@ import React, { StrictMode } from 'react';
 import TestUserRegisterPage from './page/test/TestUserRegisterPage.jsx';
 import TestUserInfoPage from './page/test/TestUserInfoPage.jsx';
 import UserloginPage from './page/test/UserloginPage.jsx'
-import { initBaseInstance } from './service/config.js'; // 또는 정확한 경로
+import { initBaseInstance } from './service/config.js';
 
 
 async function main() {
