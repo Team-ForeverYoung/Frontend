@@ -87,7 +87,6 @@ spec:
                     ls -l
                     echo "== DockerFile 있는지 확인 =="
                     ls -l Docker*
-                    ls pwd
                     docker build -f DockerFile --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
 
                 '''
