@@ -37,7 +37,7 @@ export default ({ mode }) => {
       port: 5173,
       proxy: {
         '/api/v1': {
-          target: 'k8s-default-reactapp-9a3b9418e9-8a3841d3a0aa2eaf.elb.ap-northeast-2.amazonaws.com',
+          target: getFrontendServiceUrl,
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/v1/, '/api/v1'),
         },
@@ -45,3 +45,12 @@ export default ({ mode }) => {
     },
   });
 };
+
+const getFrontendServiceUrl = async () => {
+  const res = await fetch('/config.json');
+  const config = await res.json();
+  return config.BASE_URL;
+};
+
+
+
