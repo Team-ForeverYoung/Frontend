@@ -21,7 +21,7 @@ const TestUserInfoPage = () => {
             <p className="text-[50px] text-white">TestUser의 PK를 입력해주세요</p>
             <input
                 type="text"
-                placeholder="pk입력 ㄱㄱ"
+                placeholder="pk입력 ㄱㄱ!!!!!!!!!!!!!"
                 value={testUserPk}
                 onChange={handleTestUserPkInputChange}  // 여기서 수정한 함수 사용
                 className="w-[50%] h-[35px] border-blue-500 border rounded-2xl px-2 mt-2 block"
