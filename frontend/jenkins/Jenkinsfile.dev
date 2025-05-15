@@ -78,10 +78,12 @@ spec:
             }
         }
 
-        stage('Gradle Build') {
+        stage('npm Build') {
             steps {
-                npm install
-                npm run build
+                sh '''
+                    npm install
+                    npm run build
+                '''
             }
         }
 
