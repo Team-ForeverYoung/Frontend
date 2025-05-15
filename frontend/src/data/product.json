@@ -1,0 +1,17 @@
+{
+    "products": {
+      "1": {
+        "name": "[최대용량+브러쉬 증정/온라인 한정] 한율 쑥시카 쑥떡 팩품 120ml+15ml 기획",
+        "originalPrice": 28000,
+        "salePrice": 19800,
+        "image": "/images/product1.png"
+      },
+      "2": {
+        "name": "닥터지 레드 블레미쉬 크림 70ml",
+        "originalPrice": 32000,
+        "salePrice": 25600,
+        "image": "/images/product2.png"
+      }
+    }
+    
+  }
