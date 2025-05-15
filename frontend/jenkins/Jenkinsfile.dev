@@ -87,6 +87,7 @@ spec:
 
         stage('Docker Buildx Build & Push') {
             steps {
+                dir('frontend') {
                 sh '''
                     env | grep AWS
                     cat ~/.aws/credentials || echo "no credentials file"
@@ -94,8 +95,9 @@ spec:
 
                     export DOCKER_BUILDKIT=1
 
-                    docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest ./frontend
+                    docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
                 '''
+                }
             }
         } 
     }
