@@ -24,8 +24,8 @@ spec:
 
     environment {
         AWS_REGION    = 'ap-northeast-2'
-        ECR_REPO_URI  = credentials('forever-be-dev-ecr-uri')
-        ECR_REPO      = credentials('forever-be-dev-ecr')
+        ECR_REPO_URI  = credentials('forever-fe-dev-ecr-uri')
+        ECR_REPO      = credentials('forever-fe-dev-ecr')
         BRANCH_NAME   = "${env.GIT_BRANCH}".replaceAll('/', '-')
     }
 
