@@ -78,15 +78,7 @@ spec:
             steps {
                 dir('frontend') {
                 sh '''
-                    env | grep AWS
-                    cat ~/.aws/credentials || echo "no credentials file"
-                    aws sts get-caller-identity
-
                     export DOCKER_BUILDKIT=1
-                    echo "== 파일 목록 확인 =="
-                    ls -l
-                    echo "== DockerFile 있는지 확인 =="
-                    ls -l Docker*
                     docker build -f DockerFile --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
 
                 '''

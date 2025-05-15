@@ -27,7 +27,7 @@ const TestUserRegisterPage = () => {
         <div className="w-full h-full border flex items-center justify-center">
             <input
               type="text"
-              placeholder="이름을 입력해주세용"
+              placeholder="이름을 입력해주세용용용!!"
               value={testUserName}
               onChange={handleTestUserNameInputChange}
               className="w-[50%] h-[35px] border-blue-500 border rounded-2xl px-2 bg-block"
