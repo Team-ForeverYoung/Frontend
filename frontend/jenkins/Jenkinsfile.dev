@@ -40,11 +40,6 @@ spec:
                         python3 py3-pip make cmake gcc g++ libc-dev libffi-dev openssl-dev \
                         aws-cli
 
-                    mkdir -p ~/.docker/cli-plugins/
-                    curl -SL https://github.com/docker/buildx/releases/download/v0.14.0/buildx-v0.14.0.linux-amd64 -o ~/.docker/cli-plugins/docker-buildx
-                    chmod +x ~/.docker/cli-plugins/docker-buildx
-                    docker buildx version
-
                     aws --version
                     aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
                 '''
