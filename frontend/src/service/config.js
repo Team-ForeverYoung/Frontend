@@ -1,8 +1,19 @@
 import axios from 'axios';
 
-// const BASE_URL = '/api/v1'; // 배포용
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-export const baseInstance = axios.create({
-  withCredentials: true,
-  baseURL: BASE_URL, // 기본 URL 설정
-});
+let baseInstance = null;
+
+export async function initBaseInstance() {
+  const res = await fetch('/config.json');
+  const config = await res.json();
+  baseInstance = axios.create({
+    withCredentials: true,
+    baseURL: config.BASE_URL,
+  });
+}
+
+export function getBaseInstance() {
+  if (!baseInstance) {
+    throw new Error('baseInstance is not initialized!');
+  }
+  return baseInstance;
+}
