@@ -94,9 +94,9 @@ spec:
 
                     export DOCKER_BUILDKIT=1
 
-                    docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
+                    docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest ./frontend
                 '''
             }
-        }
+        } 
     }
 }
