@@ -17,6 +17,11 @@ spec:
       env:
         - name: DOCKER_TLS_CERTDIR
           value: ""
+    - name: node
+      image: node:20
+      command:
+        - cat
+      tty: true
 """
             defaultContainer 'dind'
         }
@@ -27,8 +32,6 @@ spec:
         ECR_REPO_URI  = credentials('forever-be-dev-ecr-uri')
         ECR_REPO      = credentials('forever-be-dev-ecr')
         BRANCH_NAME   = "${env.GIT_BRANCH}".replaceAll('/', '-')
-        JAVA_HOME     = "/usr/lib/jvm/java-17-openjdk"
-        PATH          = "${env.JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
@@ -80,10 +83,12 @@ spec:
 
         stage('npm Build') {
             steps {
-                sh '''
-                    npm install
-                    npm run build
-                '''
+                container('node') {
+                    sh '''
+                        npm install
+                        npm run build
+                    '''
+                }
             }
         }
 
@@ -94,12 +99,9 @@ spec:
                     cat ~/.aws/credentials || echo "no credentials file"
                     aws sts get-caller-identity
 
-
                     export DOCKER_BUILDKIT=1
 
                     docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
-
-                
                 '''
             }
         }
