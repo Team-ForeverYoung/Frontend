@@ -34,7 +34,6 @@ spec:
             steps {
                 sh '''
                     apk update
-                    apk add --no-cache nodejs npm
                     apk add --no-cache curl
                     apk add --no-cache \
                         python3 py3-pip make cmake gcc g++ libc-dev libffi-dev openssl-dev \
@@ -74,16 +73,6 @@ spec:
             }
         }
 
-        stage('npm Build') {
-            steps {
-                dir('frontend') {
-                    sh '''
-                        npm install
-                        npm run build
-                    '''
-        }                
-            }
-        }
 
         stage('Docker Buildx Build & Push') {
             steps {
@@ -94,8 +83,13 @@ spec:
                     aws sts get-caller-identity
 
                     export DOCKER_BUILDKIT=1
+                    echo "== 파일 목록 확인 =="
+                    ls -l
+                    echo "== DockerFile 있는지 확인 =="
+                    ls -l Docker*
+                    ls pwd
+                    docker build -f DockerFile --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
 
-                    docker build --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
                 '''
                 }
             }
