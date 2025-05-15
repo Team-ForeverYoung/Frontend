@@ -40,7 +40,6 @@ spec:
                 sh '''
                     apk update
                     apk add --no-cache \
-                        curl unzip git openjdk17 sudo bash coreutils binutils \
                         python3 py3-pip make cmake gcc g++ libc-dev libffi-dev openssl-dev \
                         aws-cli
 
@@ -85,6 +84,9 @@ spec:
             steps {
                 container('node') {
                     sh '''
+                        echo "현재 작업 디렉토리: $(pwd)"
+                        echo "package.json 있음?:"
+                        ls -al
                         npm install
                         npm run build
                     '''
