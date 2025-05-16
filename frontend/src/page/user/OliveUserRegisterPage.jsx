@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { oliveMemberRegister } from '../../service/user/registerservice';
 import { OliveUserRegisterRequestDto } from '../../service/dto/OliveUserRequestDto';
 
+
 const OliveUserRegisterPage = () => {
     const [UserName, setUserName] = useState("");
     const [UserId, setUserId] = useState("");
@@ -9,13 +10,19 @@ const OliveUserRegisterPage = () => {
     const [UserPasswd, setUserPasswd] = useState("");
     const [UserCountry, setUserCountry] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();  
-        const RequestDto = new OliveUserRegisterRequestDto(
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const RequestDto = new OliveUserRegisterRequestDto(
             UserName, UserId, UserEmail, UserPasswd, UserCountry
-        );
-        oliveMemberRegister(RequestDto);
-    }
+          );
+          await oliveMemberRegister(RequestDto);
+          alert("회원가입이 완료되었습니다.");
+        } catch (error) {
+          console.error("회원가입 실패:", error);
+          alert("회원가입에 실패했습니다. 아이디 또는 이메일 중복 여부를 확인해주세요.");
+        }
+      };
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center bg-white">
@@ -46,6 +53,7 @@ const OliveUserRegisterPage = () => {
                 />
                 </div>
 
+
                 <div className='flex items-center'>
                 <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>비밀번호</p>
                   <input
@@ -57,11 +65,12 @@ const OliveUserRegisterPage = () => {
                 />
                 </div>
 
-                <div className='flex items-center'>
-                <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>이메일</p>
-                  <input
-                    type="text"
-                    placeholder="이메일"
+
+                 <div className='flex items-center'>
+                 <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>이메일</p>
+                   <input
+                     type="text"
+                     placeholder="이메일"
                     value={UserEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
                     className="w-full h-[40px] border border-blue-500 rounded-2xl px-3"
@@ -89,9 +98,10 @@ const OliveUserRegisterPage = () => {
                     회원가입
                 </button>
                 </div>
+
                 
-            </form>
-        </div>
+             </form>
+         </div>
     );
 };
 

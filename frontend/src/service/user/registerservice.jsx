@@ -1,9 +1,10 @@
-import { baseInstance } from "../config";
+import { getBaseInstance } from "../config";
 import { OliveUserRegisterResponseDto } from "../../service/dto/OliveUserResponseDto";
 
 export const oliveMemberRegister = async (oliveUserRegisterRequestDto) => {
   try {
-    const response = await baseInstance.post("/test/join", oliveUserRegisterRequestDto,
+    const baseInstance = getBaseInstance();
+    const response = await baseInstance.post("/join", oliveUserRegisterRequestDto,
       {
         headers: {
           "Content-Type": "application/json"
@@ -19,7 +20,7 @@ export const oliveMemberRegister = async (oliveUserRegisterRequestDto) => {
 
 export const oliveMemberInfo = async (oliveUserId) => {
     try {
-        const response = await baseInstance.get(`/test/${oliveUserId}`);
+        const response = await baseInstance.get(`/user/${oliveUserId}`);
         const oliveUserInfoResponseDto = new OliveUserRegisterResponseDto(response.data.name, response.data.id, response.data.email, response.data.passwd, response.data.country);
         return response.data;
     } catch (error) {
