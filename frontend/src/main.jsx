@@ -5,8 +5,8 @@ import './index.css';
 import App from './App.jsx';
 import TestUserRegisterPage from './page/test/TestUserRegisterPage.jsx';
 import TestUserInfoPage from './page/test/TestUserInfoPage.jsx';
-import OliveUserRegisterPage from './page/test/OliveUserRegisterPage.jsx'
-import UserloginPage from './page/test/UserloginPage.jsx'
+import OliveUserRegisterPage from './page/user/OliveUserRegisterPage.jsx'
+import UserloginPage from './page/user/UserloginPage.jsx'
 
 
 const root = createRoot(document.getElementById('root'));

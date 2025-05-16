@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { oliveMemberRegister } from '../../service/test/registerservice';
+import { oliveMemberRegister } from '../../service/user/registerservice';
 import { OliveUserRegisterRequestDto } from '../../service/dto/OliveUserRequestDto';
 
 const OliveUserRegisterPage = () => {
@@ -49,7 +49,7 @@ const OliveUserRegisterPage = () => {
                 <div className='flex items-center'>
                 <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>비밀번호</p>
                   <input
-                    type="text"
+                    type="password"
                     placeholder="비밀번호"
                     value={UserPasswd}
                     onChange={(e) => setUserPasswd(e.target.value)}
@@ -69,14 +69,16 @@ const OliveUserRegisterPage = () => {
                 </div>
 
                 <div className='flex items-center'>
-                <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>국적</p>
-                  <input
-                    type="text"
-                    placeholder="국적"
-                    value={UserCountry}
-                    onChange={(e) => setUserCountry(e.target.value)}
-                    className="w-full h-[40px] border border-blue-500 rounded-2xl px-3"
-                />
+                    <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>국적</p>
+                    <select
+                        value={UserCountry}
+                        onChange={(e) => setUserCountry(e.target.value)}
+                        className="w-full h-[40px] border border-blue-500 rounded-2xl px-3"
+                    >
+                    <option value="">국적 선택</option>
+                    <option value="kr">대한민국 (KR)</option>
+                    <option value="us">미국 (US)</option>
+                    </select>
                 </div>
               
                 <div className='flex items-center'>
@@ -84,7 +86,7 @@ const OliveUserRegisterPage = () => {
                     type="submit"
                     className="w-[300px] h-[40px] bg-blue-500 text-white font-semibold rounded-2xl hover:bg-blue-600 transition"
                 >
-                    제출
+                    회원가입
                 </button>
                 </div>
                 
