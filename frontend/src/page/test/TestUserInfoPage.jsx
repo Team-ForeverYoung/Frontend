@@ -18,7 +18,7 @@ const TestUserInfoPage = () => {
 
     return (
         <div className="w-full h-[50%] border items-center justify-center bg-black">
-            <p className="text-[50px] text-white">TestUser의 PK를 입력해주세요</p>
+            <p className="text-[50px] text-white">TestUser의 PK를 입력해주세요!!</p>
             <input
                 type="text"
                 placeholder="pk입력 ㄱㄱ!!!!!@@@!!!!!@@@!!!"
