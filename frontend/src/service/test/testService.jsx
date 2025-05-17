@@ -4,7 +4,7 @@ import { TestUserRegisterResponseDto } from "../../service/dto/TestUserResponseD
 export const testMemberRegister = async (testUserRegisterRequestDto) => {
   try {
     const axiosInstance = getBaseInstance();
-    const response = await axiosInstance.post("/test", testUserRegisterRequestDto);
+    const response = await axiosInstance.post("/api/v1/test", testUserRegisterRequestDto);
     return response.data;
   } catch (error) {
     console.error("회원 등록 요청 실패:", error);
@@ -15,7 +15,7 @@ export const testMemberRegister = async (testUserRegisterRequestDto) => {
 export const testMemberInfo = async (testUserId) => {
   try {
     const axiosInstance = getBaseInstance();
-    const response = await axiosInstance.get(`/test/${testUserId}`);
+    const response = await axiosInstance.get(`/api/v1/test/${testUserId}`);
     const testUserInfoResponseDto = new TestUserRegisterResponseDto(response.data.name, response.data.age);
     return response.data;
   } catch (error) {
