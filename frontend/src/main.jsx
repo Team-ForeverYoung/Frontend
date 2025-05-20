@@ -9,6 +9,7 @@ import TestUserRegisterPage from './page/test/TestUserRegisterPage.jsx';
 import TestUserInfoPage from './page/test/TestUserInfoPage.jsx';
 import OliveUserRegisterPage from './page/user/OliveUserRegisterPage.jsx'
 import UserloginPage from './page/user/UserloginPage.jsx'
+import EventJoinPage from './page/event/EventJoinPage.jsx'
 
 import { initBaseInstance } from './service/config.js';
 
@@ -25,6 +26,8 @@ async function main() {
           <Route path="/test/info" element={<TestUserInfoPage/>}/>
           <Route path="/join" element={<OliveUserRegisterPage/>}/>
           <Route path="/login" element={<UserloginPage/>}/>
+          <Route path="/event" element={<EventJoinPage/>}/>
+          
         </Routes>
       </Router>
     </StrictMode>
