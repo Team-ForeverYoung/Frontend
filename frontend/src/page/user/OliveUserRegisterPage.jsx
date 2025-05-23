@@ -30,7 +30,7 @@ const OliveUserRegisterPage = () => {
                 onSubmit={handleSubmit} 
                 className="w-[90%] max-w-md flex flex-col items-center gap-4 border border-gray-300 p-8 rounded-2xl shadow-md"
             >
-              <h1>회원가입</h1>
+              <h1>회원가입!!</h1>
                 <div className='flex items-center'>
                 <p className='w-[200px] h-[40px] py-[5px] flex justify-center items-center'>이름</p>
                 <input
