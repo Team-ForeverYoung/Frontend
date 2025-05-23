@@ -1,0 +1,89 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccountName: jenkins
+  securityContext:
+    runAsUser: 0
+  containers:
+    - name: dind
+      image: docker:24.0.7-dind
+      securityContext:
+        privileged: true
+        runAsUser: 0
+      env:
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
+"""
+            defaultContainer 'dind'
+        }
+    }
+
+    environment {
+        AWS_REGION    = 'ap-northeast-2'
+        ECR_REPO_URI  = credentials('forever-fe-prod-ecr-uri')
+        ECR_REPO      = credentials('forever-fe-prod-ecr')
+        BRANCH_NAME   = "${env.GIT_BRANCH}".replaceAll('/', '-')
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh '''
+                    apk update
+                    apk add --no-cache curl
+                    apk add --no-cache \
+                        python3 py3-pip make cmake gcc g++ libc-dev libffi-dev openssl-dev \
+                        aws-cli
+                     apk update
+                    apk add --no-cache git
+                    git --version
+                    aws --version
+                    aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
+                '''
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Set Build Vars') {
+            steps {
+                script {
+                    COMMIT_HASH = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    BUILD_TAG   = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}-${COMMIT_HASH}"
+                    env.COMMIT_HASH = COMMIT_HASH
+                    env.BUILD_TAG = BUILD_TAG
+                }
+            }
+        }
+
+        stage('Login to ECR') {
+            steps {
+                sh '''
+                    aws ecr get-login-password --region $AWS_REGION | \
+                    docker login --username AWS --password-stdin $ECR_REPO
+                '''
+            }
+        }
+
+
+        stage('Docker Buildx Build & Push') {
+            steps {
+                dir('frontend') {
+                sh '''
+                    export DOCKER_BUILDKIT=1
+                    docker build -f DockerFile --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
+
+                '''
+                }
+            }
+        } 
+    }
+}
