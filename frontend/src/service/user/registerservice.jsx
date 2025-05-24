@@ -4,7 +4,7 @@ import { OliveUserRegisterResponseDto } from "../../service/dto/OliveUserRespons
 export const oliveMemberRegister = async (oliveUserRegisterRequestDto) => {
   try {
     const baseInstance = getBaseInstance();
-    const response = await baseInstance.post("/api/v1/user/join", oliveUserRegisterRequestDto,
+    const response = await baseInstance.post("/user/join", oliveUserRegisterRequestDto,
       {
         headers: {
           "Content-Type": "application/json"

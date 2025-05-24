@@ -24,33 +24,33 @@
 // };
 
 
-import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
+// import { defineConfig, loadEnv } from 'vite';
+// import react from '@vitejs/plugin-react';
+// import tailwindcss from '@tailwindcss/vite';
 
-export default ({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  return defineConfig({
-    plugins: [react(), tailwindcss()],
-    server: {
-      host: '0.0.0.0',
-      port: 5173,
-      proxy: {
-        '/api/v1': {
-          target: getFrontendServiceUrl,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api\/v1/, '/api/v1'),
-        },
-      },
-    },
-  });
-};
+// export default ({ mode }) => {
+//   const env = loadEnv(mode, process.cwd(), '');
+//   return defineConfig({
+//     plugins: [react(), tailwindcss()],
+//     server: {
+//       host: '0.0.0.0',
+//       port: 5173,
+//       proxy: {
+//         '/api/v1': {
+//           target: getFrontendServiceUrl,
+//           changeOrigin: true,
+//           rewrite: (path) => path.replace(/^\/api\/v1/, '/api/v1'),
+//         },
+//       },
+//     },
+//   });
+// };
 
-const getFrontendServiceUrl = async () => {
-  const res = await fetch('/config.json');
-  const config = await res.json();
-  return config.BASE_URL;
-};
+// const getFrontendServiceUrl = async () => {
+//   const res = await fetch('/config.json');
+//   const config = await res.json();
+//   return config.BASE_URL;
+// };
 
 
 
