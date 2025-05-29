@@ -16,6 +16,6 @@ LABEL stage=frontend-build
 
 FROM nginx:latest
 
-COPY --from=build /dist-artifact /dist-artifact
+COPY --from=build /dist /dist-artifact
 
 EXPOSE 80
