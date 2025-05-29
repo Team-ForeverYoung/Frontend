@@ -10,12 +10,12 @@ RUN npm rebuild esbuild
 
 COPY . .
 
-RUN npm run build
+RUN npm run build && cp -r dist /dist-artifact
 
 LABEL stage=frontend-build
 
 FROM nginx:latest
 
-COPY --from=build /dist /dist-artifact
+COPY --from=build /dist-artifact /dist-artifact
 
 EXPOSE 80
