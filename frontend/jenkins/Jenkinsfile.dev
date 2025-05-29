@@ -80,8 +80,9 @@ spec:
                 sh '''
                     export DOCKER_BUILDKIT=1
                     docker build -f DockerFile --push -t $ECR_REPO_URI:${BUILD_TAG} -t $ECR_REPO_URI:latest .
-
-                '''
+		    pwd
+                    ls
+		'''
                 }
             }
         } 
