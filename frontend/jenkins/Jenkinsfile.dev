@@ -57,7 +57,7 @@ spec:
             steps {
                 script {
                     COMMIT_HASH = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-		    def TIMESTAMP = new Date().format("yyyyMMddHHmm")
+		    TIMESTAMP = new Date().format("yyyyMMddHHmm")
 		    BUILD_TAG   = "${env.BRANCH_NAME}-${TIMESTAMP}-${COMMIT_HASH}"
                     env.COMMIT_HASH = COMMIT_HASH
                     env.BUILD_TAG = BUILD_TAG
