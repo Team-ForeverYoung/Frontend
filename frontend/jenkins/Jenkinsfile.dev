@@ -27,6 +27,7 @@ spec:
         ECR_REPO_URI  = credentials('forever-fe-dev-ecr-uri')
         ECR_REPO      = credentials('forever-fe-dev-ecr')
         BRANCH_NAME   = "${env.GIT_BRANCH}".replaceAll('/', '-')
+        S3_BUCKET = 'www.foreveryoungoliveyoung.com'
     }
 
     stages {
@@ -87,6 +88,18 @@ spec:
 		'''
                 }
             }
-        } 
+        }
+	stage('Extract dist & S3 Sync') {
+	    steps {
+		dir('frontend') {
+		    script {
+			def containerId = sh(script: "docker create $ECR_REPO_URI:${BUILD_TAG}", returnStdout: true).trim()
+			sh "docker cp ${containerId}:/dist-artifact ./dist"
+			sh "docker rm ${containerId}"
+			sh "aws s3 sync dist s3://${S3_BUCKET}/ --region ${AWS_REGION} --delete"
+		    }
+		}
+	    }
+	} 
     }
 }
