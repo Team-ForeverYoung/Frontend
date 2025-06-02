@@ -3,8 +3,34 @@ import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const Cart = () => {
+const Cart_us = () => {
   const navigate = useNavigate();
+  const navigateToComplete = async () => {
+    const purchasedItems = selectedItems.map(index => cartItems[index]);
+  
+    try {
+      const response = await fetch('http://localhost:8080/api/point', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(purchasedItems)  // 배열만 보냄
+      });
+  
+      if (response.ok) {
+        navigate("/Complete", { state: { purchasedItems } });
+      } else {
+        console.error('주문 실패:', response.statusText);
+        alert('주문에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('서버 요청 중 오류:', error);
+      alert('서버 연결에 실패했습니다.');
+    }
+  };
+  
+  
+
   const [cartItems, setCartItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
@@ -47,30 +73,6 @@ const Cart = () => {
     setAllSelected(false);
   };
 
-  const navigateToComplete = async () => {
-    const payload = { point: 100 };
-
-    try {
-      const response = await fetch('http://54.180.135.26:8080/api/point/kr-direct', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        navigate("/CompletePage_kr", { state: { purchasedItems: payload } });
-      } else {
-        console.error('주문 실패:', response.statusText);
-        alert('주문에 실패했습니다.');
-      }
-    } catch (error) {
-      console.error('서버 요청 중 오류:', error);
-      alert('서버 연결에 실패했습니다.');
-    }
-  };
-
   const totalPrice = cartItems.reduce((acc, cur) => acc + cur.salePrice, 0);
 
   return (
@@ -84,9 +86,7 @@ const Cart = () => {
               checked={allSelected}
               onChange={handleSelectAll}
             /> 전체선택 |
-            <button onClick={handleDeleteSelected} disabled={selectedItems.length === 0}>
-              선택삭제
-            </button>
+            <button onClick={handleDeleteSelected} disabled={selectedItems.length === 0}>선택삭제</button>
           </div>
         </div>
         <hr />
@@ -150,4 +150,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Cart_us;

@@ -7,7 +7,7 @@ export async function initBaseInstance() {
   const config = await res.json();
   baseInstance = axios.create({
     withCredentials: true,
-    baseURL: config.BASE_URL,
+    baseURL: `${config.BASE_URL}`,
   });
 }
 
