@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import "./Complete.css";
 import { useNavigate } from 'react-router-dom';
 
-const CompletePage = () => {
+const CompletePage_us = () => {
   const navigate = useNavigate();
   const [purchasedItems, setPurchasedItems] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/point')
+    fetch('http://54.80.200.128:8080/api/point')
       .then(res => res.json())
       .then(data => {
         setPurchasedItems(data);
@@ -17,16 +17,17 @@ const CompletePage = () => {
       });
   }, []);
 
-  const totalPrice = purchasedItems.reduce((acc, item) => acc + item.salePrice, 0);
+  const totalPoint = purchasedItems.reduce((acc, item) => acc + item.point, 0);
 
   return (
     <div className="complete-container">
       <div className="complete-left">
-        <h2 className="complete-title">
-          주문이 완료되었습니다.<br />
-          포인트 적립 예정입니다.
-        </h2>
+        <h2 className="complete-title">주문이 완료되었습니다.</h2>
 
+        <div className="purchased-items">
+          <h4>총 적립된 포인트</h4>
+          <p style={{ fontSize: "18px", fontWeight: "bold" }}>{totalPoint.toLocaleString()}점</p>
+        </div>
 
         <button className="complete-button" onClick={() => navigate("/")}>
           메인으로 돌아가기
@@ -43,26 +44,9 @@ const CompletePage = () => {
           <h4 className="cart-section-title">적립혜택</h4>
           <p className="cart-description">적립 혜택이 없습니다.</p>
         </div>
-
-        <div className="cart-price-box">
-          <h4 className="cart-section-title">결제 예정금액</h4>
-          <div className="price-row">
-            <span>상품금액</span>
-            <span>{totalPrice.toLocaleString()}원</span>
-          </div>
-          <div className="price-row">
-            <span>할인금액</span>
-            <span className="discount">0원</span>
-          </div>
-          <hr className="divider" />
-          <div className="price-row total">
-            <span>합계</span>
-            <span className="total-price">{totalPrice.toLocaleString()}원</span>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default CompletePage;
+export default CompletePage_us;
