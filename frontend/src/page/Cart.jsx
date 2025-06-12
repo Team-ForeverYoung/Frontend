@@ -8,6 +8,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
+  const [userId, setUserId] = useState(''); // ✅ userId 입력 상태 추가
 
   useEffect(() => {
     const stored = Cookies.get('cartItems');
@@ -47,17 +48,17 @@ const Cart = () => {
     setAllSelected(false);
   };
 
+  const totalPrice = cartItems.reduce((acc, cur) => acc + cur.salePrice, 0);
+
   const navigateToComplete = async () => {
-    const payload = { point: 100 };
+    const payload = {
+      price: totalPrice,
+      userId: userId // ✅ userId도 서버로 전송
+    };
 
     try {
-      const response = await fetch('http://54.180.135.26:8080/api/point/kr-direct', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+      const axiosInstance = getBaseInstance();
+      const response = await axiosInstance.post("/point/kr-direct", payload);
 
       if (response.ok) {
         navigate("/CompletePage_kr", { state: { purchasedItems: payload } });
@@ -70,8 +71,6 @@ const Cart = () => {
       alert('서버 연결에 실패했습니다.');
     }
   };
-
-  const totalPrice = cartItems.reduce((acc, cur) => acc + cur.salePrice, 0);
 
   return (
     <div className="cart-container">
@@ -93,16 +92,16 @@ const Cart = () => {
 
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
-            <div className="cart-item" key={index}>
+            <div className="ml-[35%]" key={index}>
               <input
                 type="checkbox"
                 checked={selectedItems.includes(index)}
                 onChange={() => handleCheckboxChange(index)}
               />
-              <img src={item.image} alt="상품" className="cart-item-image" />
-              <div className="cart-item-info">
-                <p className="cart-item-name">{item.name}</p>
-                <p className="cart-item-price">{item.salePrice.toLocaleString()}원</p>
+              <img src={item.image} alt="상품" className="w-[40%] h-[40%]" />
+              <div className="inline">
+                <p className="">{item.name}</p>
+                <p className="">{item.salePrice.toLocaleString()}원</p>
               </div>
             </div>
           ))
@@ -141,6 +140,15 @@ const Cart = () => {
             <span className="total-price">{totalPrice.toLocaleString()}원</span>
           </div>
         </div>
+
+        {/* ✅ userId 입력 필드 추가 */}
+        <input
+          type="text"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+          placeholder="User ID를 입력하세요"
+          className="w-full mb-4 p-2 border border-gray-300 rounded"
+        />
 
         <button className="order-button" onClick={navigateToComplete}>
           주문하기
