@@ -57,6 +57,8 @@ const Cart = () => {
     };
 
     try {
+      console.log(payload);
+      console.log(payload);
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.post("/point/kr-direct", payload);
 
