@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+import { getBaseInstance } from "../service/config";
 const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
