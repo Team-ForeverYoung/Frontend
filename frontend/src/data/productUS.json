@@ -1,0 +1,64 @@
+{
+  "products": {
+    "1": {
+      "name": "[최대용량+브러쉬 증정/온라인 한정] 한율 쑥시카 쑥떡 팩품 120ml+15ml 기획",
+      "originalPrice": 28000,
+      "salePrice": 19800,
+      "image": "/imagesUS/product1.png"
+    },
+    "2": {
+      "name": "닥터지 레드 블레미쉬 크림 70ml",
+      "originalPrice": 32000,
+      "salePrice": 25600,
+      "image": "/imagesUS/product2.png"
+    },
+    "3": {
+      "name": "라운드랩 1025 독도 토너 200ml",
+      "originalPrice": 15000,
+      "salePrice": 12000,
+      "image": "/imagesUS/product3.png"
+    },
+    "4": {
+      "name": "이니스프리 그린티 씨드 세럼 80ml",
+      "originalPrice": 24000,
+      "salePrice": 19200,
+      "image": "/imagesUS/product4.png"
+    },
+    "5": {
+      "name": "마몽드 로즈워터 토너 250ml",
+      "originalPrice": 18000,
+      "salePrice": 13500,
+      "image": "/imagesUS/product5.png"
+    },
+    "6": {
+      "name": "숨37 워터풀 타임리스 워터젤 크림",
+      "originalPrice": 42000,
+      "salePrice": 33600,
+      "image": "/imagesUS/product6.png"
+    },
+    "7": {
+      "name": "헤라 옴므 에센스 인 스킨 125ml",
+      "originalPrice": 30000,
+      "salePrice": 21000,
+      "image": "/imagesUS/product7.png"
+    },
+    "8": {
+      "name": "토니모리 원더 세라마이드 모찌 토너",
+      "originalPrice": 12000,
+      "salePrice": 9600,
+      "image": "/imagesUS/product8.png"
+    },
+    "9": {
+      "name": "클리오 킬커버 파운웨어 쿠션 XP",
+      "originalPrice": 28000,
+      "salePrice": 22400,
+      "image": "/imagesUS/product9.png"
+    },
+    "10": {
+      "name": "더페이스샵 화이트 씨드 브라이트닝 세럼",
+      "originalPrice": 22000,
+      "salePrice": 16500,
+      "image": "/imagesUS/product10.png"
+    }
+  }
+}

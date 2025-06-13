@@ -13,7 +13,7 @@ const CompletePage_us = () => {
         setPurchasedItems(data);
       })
       .catch(err => {
-        console.error("주문 데이터 조회 실패:", err);
+        console.error("Failed to fetch order data:", err);
       });
   }, []);
 
@@ -22,27 +22,27 @@ const CompletePage_us = () => {
   return (
     <div className="complete-container">
       <div className="complete-left">
-        <h2 className="complete-title">주문이 완료되었습니다.</h2>
+        <h2 className="complete-title">Your order has been completed.</h2>
 
         <div className="purchased-items">
-          <h4>총 적립된 포인트</h4>
-          <p style={{ fontSize: "18px", fontWeight: "bold" }}>{totalPoint.toLocaleString()}점</p>
+          <h4>Total Earned Points</h4>
+          <p style={{ fontSize: "18px", fontWeight: "bold" }}>{totalPoint.toLocaleString()} Points</p>
         </div>
 
         <button className="complete-button" onClick={() => navigate("/")}>
-          메인으로 돌아가기
+          Back to Home
         </button>
       </div>
 
       <div className="cart-right">
         <div className="cart-steps">
-          <span className="step">01 장바구니</span>
-          <span className="step active">02 주문완료</span>
+          <span className="step">01 Cart</span>
+          <span className="step active">02 Order Complete</span>
         </div>
 
         <div className="cart-benefit-box">
-          <h4 className="cart-section-title">적립혜택</h4>
-          <p className="cart-description">적립 혜택이 없습니다.</p>
+          <h4 className="cart-section-title">Benefits</h4>
+          <p className="cart-description">No benefits available.</p>
         </div>
       </div>
     </div>

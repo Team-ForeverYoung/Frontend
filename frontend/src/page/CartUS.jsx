@@ -3,12 +3,13 @@ import './Cart.css';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { getBaseInstance } from "../service/config";
-const Cart = () => {
+
+const CartUS = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
-  const [userId, setUserId] = useState(''); // userId 입력 상태 추가
+  const [userId, setUserId] = useState(''); // userId input state
 
   useEffect(() => {
     const stored = Cookies.get('cartItems');
@@ -53,40 +54,39 @@ const Cart = () => {
   const navigateToComplete = async () => {
     const payload = {
       price: totalPrice,
-      userId: userId // userId도 서버로 전송
+      userId: userId
     };
 
     try {
-      console.log(payload);
       console.log(payload);
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.post("/point", payload);
 
       if (response.ok) {
-        navigate("/CompletePage_kr", { state: { purchasedItems: payload } });
+        navigate("/CompletePage_us", { state: { purchasedItems: payload } });
       } else {
-        console.error('주문 실패:', response.statusText);
-        alert('주문에 실패했습니다.');
+        console.error('Order failed:', response.statusText);
+        alert('Order failed.');
       }
     } catch (error) {
-      console.error('서버 요청 중 오류:', error);
-      alert('서버 연결에 실패했습니다.');
+      console.error('Server error:', error);
+      alert('Failed to connect to the server.');
     }
   };
 
   return (
     <div className="cart-container">
       <div className="cart-left">
-        <h2 className="cart-title">장바구니</h2>
+        <h2 className="cart-title">Cart</h2>
         <div className="cart-header">
           <div className="cart-check-delete">
             <input
               type="checkbox"
               checked={allSelected}
               onChange={handleSelectAll}
-            /> 전체선택 |
+            /> Select All |
             <button onClick={handleDeleteSelected} disabled={selectedItems.length === 0}>
-              선택삭제
+              Delete Selected
             </button>
           </div>
         </div>
@@ -100,64 +100,64 @@ const Cart = () => {
                 checked={selectedItems.includes(index)}
                 onChange={() => handleCheckboxChange(index)}
               />
-              <img src={item.image} alt="상품" className="w-[40%] h-[40%]" />
+              <img src={item.image} alt="Product" className="w-[40%] h-[40%]" />
               <div className="inline">
-                <p className="">{item.name}</p>
-                <p className="">{item.salePrice.toLocaleString()}원</p>
+                <p>{item.name}</p>
+                <p>{item.salePrice.toLocaleString()} KRW</p>
               </div>
             </div>
           ))
         ) : (
           <div className="cart-empty">
             <div className="cart-empty-icon">❗</div>
-            <p className="cart-empty-message">장바구니에 담긴 상품이 없습니다.</p>
+            <p className="cart-empty-message">Your cart is empty.</p>
           </div>
         )}
       </div>
 
       <div className="cart-right">
         <div className="cart-steps">
-          <span className="step active">01 장바구니</span>
-          <span className="step">02 주문완료</span>
+          <span className="step active">01 Cart</span>
+          <span className="step">02 Order Complete</span>
         </div>
 
         <div className="cart-benefit-box">
-          <h4 className="cart-section-title">적립혜택</h4>
-          <p className="cart-description">적립 혜택이 없습니다.</p>
+          <h4 className="cart-section-title">Benefits</h4>
+          <p className="cart-description">No benefits available.</p>
         </div>
 
         <div className="cart-price-box">
-          <h4 className="cart-section-title">결제 예정금액</h4>
+          <h4 className="cart-section-title">Payment Amount</h4>
           <div className="price-row">
-            <span>상품금액</span>
-            <span>{totalPrice.toLocaleString()}원</span>
+            <span>Product Total</span>
+            <span>{totalPrice.toLocaleString()} KRW</span>
           </div>
           <div className="price-row">
-            <span>할인금액</span>
-            <span className="discount">0원</span>
+            <span>Discount</span>
+            <span className="discount">0 KRW</span>
           </div>
           <hr className="divider" />
           <div className="price-row total">
-            <span>합계</span>
-            <span className="total-price">{totalPrice.toLocaleString()}원</span>
+            <span>Total</span>
+            <span className="total-price">{totalPrice.toLocaleString()} KRW</span>
           </div>
         </div>
 
-        {/* userId 입력 필드 추가 */}
+        {/* userId input */}
         <input
           type="text"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
-          placeholder="User ID를 입력하세요"
+          placeholder="Enter User ID"
           className="w-full mb-4 p-2 border border-gray-300 rounded"
         />
 
         <button className="order-button" onClick={navigateToComplete}>
-          주문하기
+          Place Order
         </button>
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default CartUS;
