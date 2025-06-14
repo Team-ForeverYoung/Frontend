@@ -60,7 +60,7 @@ const CartUS = () => {
     try {
       console.log(payload);
       const axiosInstance = getBaseInstance();
-      const response = await axiosInstance.post("/point", payload);
+      const response = await axiosInstance.post("/point_us", payload);
 
       if (response.ok) {
         navigate("/CompletePage_us", { state: { purchasedItems: payload } });
