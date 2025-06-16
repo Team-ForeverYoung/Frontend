@@ -15,7 +15,9 @@ const CompletePage_us = () => {
     try {
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.get(`/point_us/${userId}`);
-
+      console.log(response);
+      console.log(response.data);
+      console.log(response.data.data);
       const userPoint = response.data?.data?.point || 0;
       setTotalPoint(userPoint);
     } catch (error) {
