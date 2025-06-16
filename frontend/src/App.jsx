@@ -31,6 +31,8 @@ function App() {
         <Link to="/CartUS">Cart US</Link> |{" "}
         <Link to="/Complete">주문완료</Link> |{" "}
         <Link to="/CompletePage_us">US Complete</Link>
+        <Link to="/event">올영세일</Link>
+        
       </nav>
       <img src={bannerImage} className="w-[100%] h-[10%]" />
       <Routes>
@@ -43,6 +45,7 @@ function App() {
         <Route path="/CompletePage_kr" element={<CompletePage_kr />} />
         <Route path="/CompletePage_us" element={<CompletePage_us />} />
         <Route path="/Complete" element={<CompletePage />} />
+        <Route path="/event" element={<EventJoinPage />} />
       </Routes>
     </div>
   );
