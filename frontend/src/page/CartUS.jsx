@@ -61,13 +61,13 @@ const CartUS = () => {
       console.log(payload);
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.post("/point_us", payload);
-
       if (response.ok) {
         navigate("/CompletePage_us", { state: { purchasedItems: payload } });
-      } else {
-        console.error('Order failed:', response.statusText);
-        alert('Order failed.');
-      }
+      } 
+      // else {
+      //   console.error('Order failed:', response.statusText);
+      //   alert('Order failed.');
+      // }
     } catch (error) {
       console.error('Server error:', error);
       alert('Failed to connect to the server.');

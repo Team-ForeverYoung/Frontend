@@ -64,10 +64,11 @@ const Cart = () => {
 
       if (response.ok) {
         navigate("/CompletePage_kr", { state: { purchasedItems: payload } });
-      } else {
-        console.error('주문 실패:', response.statusText);
-        alert('주문에 실패했습니다.');
-      }
+      } 
+      // else {
+      //   console.error('주문 실패:', response.statusText);
+      //   alert('주문에 실패했습니다.');
+      // }
     } catch (error) {
       console.error('서버 요청 중 오류:', error);
       alert('서버 연결에 실패했습니다.');
