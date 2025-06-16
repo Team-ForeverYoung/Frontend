@@ -6,7 +6,6 @@ import { getBaseInstance } from "../service/config";
 const CompletePage = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState('');
-  const [purchasedItems, setPurchasedItems] = useState([]);
   const [totalPoint, setTotalPoint] = useState(null);
 
   const handleCheckPoint = async () => {
@@ -19,15 +18,8 @@ const CompletePage = () => {
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.get(`/point/${userId}`);
 
-      const data = response;
-      console.log(data);
-      console.log(data.data);
-      setPurchasedItems(data);
-
-      const sum = data.reduce((acc, item) => acc + item.point, 0);
-      setTotalPoint(sum);
-
-      navigate("/CompletePage_kr", { state: { purchasedItems: data } });
+      const userPoint = response.data?.data?.point || 0;
+      setTotalPoint(userPoint);
     } catch (error) {
       console.error("서버 요청 중 오류:", error);
       alert("포인트 조회 중 오류가 발생했습니다.");

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import "./Complete.css";
-import { useNavigate } from 'react-router-dom';
 import { getBaseInstance } from "../service/config";
 
 const CompletePage_us = () => {
-  const navigate = useNavigate();
   const [userId, setUserId] = useState('');
-  const [purchasedItems, setPurchasedItems] = useState([]);
   const [totalPoint, setTotalPoint] = useState(null);
 
   const handleCheckPoint = async () => {
@@ -19,14 +16,8 @@ const CompletePage_us = () => {
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.get(`/point_us/${userId}`);
 
-      const data = response;
-      console.log(data);
-      console.log(data.data);
-
-      setPurchasedItems(data.details || []);
-
-      const sum = (data.details || []).reduce((acc, item) => acc + item.point, 0);
-      setTotalPoint(sum);
+      const userPoint = response.data?.data?.point || 0;
+      setTotalPoint(userPoint);
     } catch (error) {
       console.error("Error fetching point data:", error);
       alert("Failed to retrieve point information.");
