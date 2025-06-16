@@ -28,9 +28,9 @@ function App() {
         <Link to="/products">상품 목록</Link> |{" "}
         <Link to="/productsUS">미국 상품 목록</Link> |{" "}
         <Link to="/Cart">장바구니</Link> |{" "}
-        <Link to="/CartUS">Cart US</Link> |{" "}
+        <Link to="/productsUS/CartUS">Cart US</Link> |{" "}
         <Link to="/Complete">주문완료</Link> |{" "}
-        <Link to="/CompletePage_us">US Complete</Link>
+        <Link to="/productsUS/CompletePage_us">US Complete</Link>
         <Link to="/event">올영세일</Link>
         
       </nav>
@@ -41,9 +41,9 @@ function App() {
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/productsUS" element={<ProductUSListPage />} />
         <Route path="/Cart" element={<CartPage />} />
-        <Route path="/CartUS" element={<CartUS />} />
+        <Route path="/productsUS/CartUS" element={<CartUS />} />
         <Route path="/CompletePage_kr" element={<CompletePage_kr />} />
-        <Route path="/CompletePage_us" element={<CompletePage_us />} />
+        <Route path="/productsUS/CompletePage_us" element={<CompletePage_us />} />
         <Route path="/Complete" element={<CompletePage />} />
         <Route path="/event" element={<EventJoinPage />} />
       </Routes>

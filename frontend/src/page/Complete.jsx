@@ -1,65 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./Complete.css";
 import { useNavigate } from 'react-router-dom';
+import { getBaseInstance } from "../service/config";
 
 const CompletePage = () => {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState('');
   const [purchasedItems, setPurchasedItems] = useState([]);
+  const [totalPoint, setTotalPoint] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:8080/api/point')
-      .then(res => res.json())
-      .then(data => {
-        setPurchasedItems(data);
-      })
-      .catch(err => {
-        console.error("주문 데이터 조회 실패:", err);
-      });
-  }, []);
+  const handleCheckPoint = async () => {
+    if (!userId.trim()) {
+      alert("유저 PK를 입력해주세요.");
+      return;
+    }
 
-  const totalPrice = purchasedItems.reduce((acc, item) => acc + item.salePrice, 0);
+    try {
+      const axiosInstance = getBaseInstance();
+      const response = await axiosInstance.get(`/point/${userId}`);
+
+      const data = response.data;
+      setPurchasedItems(data);
+
+      const sum = data.reduce((acc, item) => acc + item.point, 0);
+      setTotalPoint(sum);
+
+      navigate("/CompletePage_kr", { state: { purchasedItems: data } });
+    } catch (error) {
+      console.error("서버 요청 중 오류:", error);
+      alert("포인트 조회 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <div className="complete-container">
-      <div className="complete-left">
-        <h2 className="complete-title">
-          주문이 완료되었습니다.<br />
-          포인트 적립 예정입니다.
-        </h2>
+      <div className="complete-left ml-[15%]">
+        <h2 className="complete-title">포인트 조회</h2>
 
-
-        <button className="complete-button" onClick={() => navigate("/")}>
-          메인으로 돌아가기
-        </button>
-      </div>
-
-      <div className="cart-right">
-        <div className="cart-steps">
-          <span className="step">01 장바구니</span>
-          <span className="step active">02 주문완료</span>
+        <div style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            placeholder="유저 PK 입력"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            style={{ padding: "8px", marginRight: "10px" }}
+          />
+          <button className="complete-button" onClick={handleCheckPoint}>
+            포인트 조회하기
+          </button>
         </div>
 
-        <div className="cart-benefit-box">
-          <h4 className="cart-section-title">적립혜택</h4>
-          <p className="cart-description">적립 혜택이 없습니다.</p>
-        </div>
-
-        <div className="cart-price-box">
-          <h4 className="cart-section-title">결제 예정금액</h4>
-          <div className="price-row">
-            <span>상품금액</span>
-            <span>{totalPrice.toLocaleString()}원</span>
+        {totalPoint !== null && (
+          <div style={{ fontWeight: "bold", fontSize: "18px", marginTop: "10px" }}>
+            총 적립 포인트: {totalPoint.toLocaleString()}점
           </div>
-          <div className="price-row">
-            <span>할인금액</span>
-            <span className="discount">0원</span>
-          </div>
-          <hr className="divider" />
-          <div className="price-row total">
-            <span>합계</span>
-            <span className="total-price">{totalPrice.toLocaleString()}원</span>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
