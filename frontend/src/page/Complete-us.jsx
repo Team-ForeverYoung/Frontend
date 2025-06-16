@@ -19,7 +19,10 @@ const CompletePage_us = () => {
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.get(`/point_us/${userId}`);
 
-      const data = response.data.data;
+      const data = response;
+      console.log(data);
+      console.log(data.data);
+
       setPurchasedItems(data.details || []);
 
       const sum = (data.details || []).reduce((acc, item) => acc + item.point, 0);
