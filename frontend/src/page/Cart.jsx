@@ -61,7 +61,7 @@ const Cart = () => {
       console.log(payload);
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.post("/point", payload);
-
+      alert("주문 완료!");
       if (response.ok) {
         navigate("/CompletePage_kr", { state: { purchasedItems: payload } });
       } 

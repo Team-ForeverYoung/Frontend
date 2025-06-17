@@ -61,6 +61,7 @@ const CartUS = () => {
       console.log(payload);
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.post("/point_us", payload);
+      alert("Order Completed!");
       if (response.ok) {
         navigate("/CompletePage_us", { state: { purchasedItems: payload } });
       } 

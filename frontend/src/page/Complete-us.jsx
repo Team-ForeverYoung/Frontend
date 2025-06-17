@@ -16,10 +16,11 @@ const CompletePage_us = () => {
       const axiosInstance = getBaseInstance();
       const response = await axiosInstance.get(`/point_us/${userId}`);
 
-      console.log(response.data.data); // 네가 요구한 기준
+      console.log(response.data.data); 
 
-      const userPoint = response.data.data;  // 이게 숫자 값임
+      const userPoint = response.data.data;  
       setTotalPoint(userPoint);
+      alert("Point inquiry completed successfully");
     } catch (error) {
       console.error("Error fetching point data:", error);
       alert("Failed to retrieve point information.");

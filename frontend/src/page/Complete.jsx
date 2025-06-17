@@ -20,6 +20,7 @@ const CompletePage = () => {
 
       const userPoint = response.data?.data?.point || 0;
       setTotalPoint(userPoint);
+      alert("포인트가 성공적으로 조회 되었습니다!");
     } catch (error) {
       console.error("서버 요청 중 오류:", error);
       alert("포인트 조회 중 오류가 발생했습니다.");

@@ -11,6 +11,7 @@ const CompletePage_kr = () => {
       .then(res => res.json())
       .then(data => {
         setPurchasedItems(data);
+        alert("포인트가 성공적으로 조회 되었습니다!");
       })
       .catch(err => {
         console.error("주문 데이터 조회 실패:", err);
